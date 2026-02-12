@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Embed Code</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        h2 { color: #555; margin-top: 30px; }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #4F46E5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 9999;
+        }
+        .chat-iframe {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 9998;
+        }
+        .chat-iframe.open { display: block; }
+    </style>
+</head>
+<body>
+    <h1>🤖 챗봇 팝업 임베드 코드</h1>
+    
+    <div class="note">
+        <strong>📌 사용 방법:</strong> 아래 코드를 웹사이트의 &lt;body&gt; 태그 끝에 붙여넣으세요.
+        <br><br>
+        <strong>YOUR_REPLIT_URL</strong>을 실제 배포된 앱 URL로 변경하세요.
+    </div>
+
+    <h2>1. 팝업 버튼 + iframe 방식</h2>
+    <div class="code-block">
+&lt;!-- Chatbot Popup Button --&gt;
+&lt;button id="chatBtn" onclick="toggleChat()" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #4F46E5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999;
+"&gt;💬&lt;/button&gt;
+
+&lt;!-- Chatbot iframe --&gt;
+&lt;iframe id="chatFrame" src="YOUR_REPLIT_URL/chat_widget" style="
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 400px;
+    height: 600px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 9998;
+"&gt;&lt;/iframe&gt;
+
+&lt;script&gt;
+function toggleChat() {
+    var frame = document.getElementById('chatFrame');
+    var btn = document.getElementById('chatBtn');
+    if (frame.style.display === 'none') {
+        frame.style.display = 'block';
+        btn.innerHTML = '✕';
+    } else {
+        frame.style.display = 'none';
+        btn.innerHTML = '💬';
+    }
+}
+&lt;/script&gt;
+    </div>
+
+    <h2>2. 새 창 팝업 방식</h2>
+    <div class="code-block">
+&lt;button onclick="window.open('YOUR_REPLIT_URL/chat_widget', 'chatbot', 'width=450,height=650')" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #4F46E5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+"&gt;💬&lt;/button&gt;
+    </div>
+
+    <h2>3. 직접 링크</h2>
+    <div class="code-block">
+채팅 위젯 URL: YOUR_REPLIT_URL/chat_widget
+    </div>
+
+    <!-- Demo Button -->
+    <button class="chat-button" onclick="toggleDemo()">💬</button>
+    <iframe id="demoFrame" class="chat-iframe" src="/chat_widget"></iframe>
+    
+    <script>
+        function toggleDemo() {
+            var frame = document.getElementById('demoFrame');
+            var btn = document.querySelector('.chat-button');
+            frame.classList.toggle('open');
+            btn.innerHTML = frame.classList.contains('open') ? '✕' : '💬';
+        }
+    </script>
+</body>
+</html>
